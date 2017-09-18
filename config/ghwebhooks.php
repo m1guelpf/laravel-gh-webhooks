@@ -54,7 +54,16 @@ return [
      | The property of the model to check repositories against.
      |
      */
-     'key' => 'id',
+     'model_key' => 'id',
+
+     /*
+     |--------------------------------------------------------------------------
+     | Payload Key
+     |--------------------------------------------------------------------------
+     | The webhook property to check models against.
+     |
+     */
+     'payload_key' => 'repository.id',
 
      /*
      |--------------------------------------------------------------------------
