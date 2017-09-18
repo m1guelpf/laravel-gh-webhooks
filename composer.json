@@ -1,0 +1,41 @@
+{
+    "name": "m1guelpf/github-webhooks",
+    "description": "A Laravel package to interact with GitHub Webhooks.",
+    "keywords": [
+        "m1guelpf",
+        "github-webhooks"
+    ],
+    "homepage": "https://github.com/m1guelpf/laravel-gh-webhooks",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Miguel Piedrafita",
+            "email": "soy@miguelpiedrafita.com",
+            "homepage": "https://miguelpiedrafita.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.0",
+        "laravel/framework": "5.5.*"
+
+    },
+    "autoload": {
+        "psr-4": {
+            "M1guelpf\\GHWebhooks\\": "src"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+      "laravel": {
+        "providers": [
+            "M1guelpf\\GHWebhooks\\GHWebhooksServiceProvider"
+        ],
+        "aliases": {
+            "GHWebhooks": "M1guelpf\\GHWebhooks\\GHWebhooksFacade"
+        }
+      }
+    }
+}
