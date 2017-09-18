@@ -24,9 +24,9 @@ class GHWebhooks
         $data = request()->input();
 
         if (class_exists(config('ghwebhooks.model'))) {
-            $model = config('ghwebhooks.model')::where(config('ghwebhooks.model_key', 'id'), array_get($data, config('ghwebhooks.payload_key', 'repository.id'), 'repository.id'))->get();
+            $model = config('ghwebhooks.model')::where(config('ghwebhooks.model_key', 'id'), array_get($data, config('ghwebhooks.payload_key', 'repository.id'), 'repository.id'))->first();
 
-            throw_unless($model->exists, new BadRequestHttpException(config('ghwebhooks.modelerror', "This repository doesn't exist in this application.")));
+            throw_unless(!is_null($model) && $model->exists, new BadRequestHttpException(config('ghwebhooks.modelerror', "This repository doesn't exist in this application.")));
             event(new $class($data, $model));
 
             return response()->json(config('ghwebhooks.response', ['message' => 'Event successfully received.']));
