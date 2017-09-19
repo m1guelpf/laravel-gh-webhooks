@@ -13,7 +13,7 @@ class GHWebhooks
      */
     public function handle()
     {
-        if (config('ghwebhook.secret')) {
+        if (config('ghwebhooks.secret')) {
             throw_unless($this->githubSignatureIsValid(), new BadRequestHttpException(config('ghwebhooks.secreterror', "This action didn't come from GitHub or webhooks aren't properly configured.")));
         }
 
