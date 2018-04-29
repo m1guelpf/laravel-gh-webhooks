@@ -44,11 +44,8 @@ class GHWebhooks
      */
     protected function githubSignatureIsValid() : bool
     {
-        $gitHubSignature = request()->header('X-Hub-Signature', 'sha1=PlaceHolderHash');
-        list($usedAlgorithm, $gitHubHash) = explode('=', $gitHubSignature, 2);
-        $payload = file_get_contents('php://input');
-        $calculatedHash = hash_hmac($usedAlgorithm, $payload, config('ghwebhook.secret'));
+        [$algo, $hash] = explode('=', request()->header('X-Hub-Signature', 'sha1=PlaceHolderHash'), 2);
 
-        return $calculatedHash === $gitHubHash;
+        return hash_equals($hash, hash_hmac($algo, file_get_contents('php://input'), config('ghwebhooks.secret')));
     }
 }
